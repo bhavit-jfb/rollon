@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invalid Credentials</title>
+    <style>
+        body {
+            background-image: radial-gradient(rgb(255 255 255 / 60%) 1.05px, transparent 1px), url(/static/background_2.jpg);
+            background-size: 75px 75px, cover;
+            background-position: 0 0, center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80vh;
+        }
+
+        h2 {
+            font-size: 4rem;
+            color: #fff;
+        }
+
+        .h2_1 {
+            position: relative;
+            top: -9rem;
+            left: 3rem;
+        }
+
+        .h2_2 {
+            position: relative;
+            top: -2rem;
+        }
+
+        .div_2 {
+            text-align: center;
+        }
+
+        .div_2 a {
+            font-size: 2rem;
+            text-decoration: none;
+            background-color: #823114;
+            font-weight: 900;
+            color: #fff;
+            padding: 8px 21px;
+            border-radius: 17px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="div">
+        <h2 class="h2_1">INVALID</h2>
+        <h2 class="h2_2">CREDENTIALS</h2>
+    </div>
+    <div class="div_2">
+        <a href="{{ url_for('login') }}">Proced to Login</a>
+    </div>
+</body>
+
+</html>

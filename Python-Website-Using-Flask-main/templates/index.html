@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Boldonse&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='index_resposnive.css') }}">
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Styles for the custom confirmation dialog */
+        .confirm-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .confirm-dialog-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .confirm-dialog button {
+            margin: 5px;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 3.5rem;
+            font-family: "Caveat", cursive;
+            color: #000 !important;
+            transition: 0.5s all ease;
+        }
+        .cell:hover{
+            backdrop-filter: sepia(1);
+        }
+
+        .welcomename {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .welcomename span {
+            text-decoration: underline;
+            text-decoration-color: #823114;
+        }
+
+        .logoutbtn {
+            font-size: 1.2rem;
+        }
+
+        .logoutbtn_2 {
+            color: #ffffff !important;
+            /* text-decoration: underline !important; */
+        }
+
+        .cell_box a:hover {
+            text-decoration: underline !important;
+        }
+
+        .big_cell {
+            /* background-image: url("https://cdn.sanity.io/images/gtd4w1cq/production/f9295f017f6a6ba6c920627d2a8887729601b6f8-4096x2305.jpg?auto=format"); */
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: top;
+            height: 100vh;
+            position: relative;
+            z-index: 1;
+            color: #000;
+        }
+
+        .contactBox {
+            text-align: center;
+            font-family: "Caveat", cursive;
+            position: relative;
+        }
+
+        .contact_cell {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            height: 100%;
+            padding: 0rem 2rem;
+            transition: 0.5s all ease;
+        }
+        .contact_cell:hover{
+            backdrop-filter: sepia(1);
+        }
+
+        .contact_cell_1 {
+            text-align: center;
+        }
+
+        .contact_cell_2 {
+            text-align: center;
+        }
+
+        .contact_cell input {
+            margin-top: 1rem;
+        }
+
+        .contact_cell textarea {
+            margin-top: 1rem;
+        }
+
+        form {
+            text-align: center;
+            height: 50vh;
+        }
+
+        form label {
+            font-size: 1.2rem;
+        }
+
+        #password {
+            margin-top: 1rem;
+        }
+
+        form input,
+        textarea {
+            width: 50vh;
+            border-radius: 8px;
+            border: none;
+            padding: 8px 10px;
+            box-shadow: 0px 1px 4px 0px #3e3e3e;
+            background: white;
+        }
+
+        form input,
+        textarea:focus {
+            outline: none;
+        }
+
+        form input::placeholder {
+            text-align: top;
+        }
+
+        form button {
+            margin-top: 1rem;
+            padding: 9px 37px;
+            border-radius: 18px;
+            border: none;
+            position: absolute;
+            right: 11.5rem;
+            font-family: "Caveat";
+            font-size: 1.3rem;
+            transition: 0.5s all ease;
+            transition-delay:0.5s;
+        }
+        form button:hover{
+            background: #000 !important;
+            color: #fff !important;
+            text-shadow: 1px 6px 2px #823114 !important;
+        }
+        form .button_edit {
+            margin-top: 1rem !important;
+            padding: 8px 0px !important;
+            border: none !important;
+            /* box-shadow: 0px 1px 4px 0px #3e3e3e !important; */
+            position: static !important;
+            font-family: "Caveat" !important;
+            font-size: 1rem !important;
+            background: transparent !important;
+        }
+
+        a {
+            position: relative;
+            text-decoration: none;
+            color: #823114;
+        }
+
+        hr {
+            margin-top: 2rem;
+        }
+
+        .combineBox {
+            display: flex;
+            justify-content: space-around;
+            align-items: baseline;
+            padding: 0rem 2rem;
+        }
+
+        /* 
+        table,
+        thead,
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+        } */
+
+        .logged_user {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .hostel {
+            /* height: 100vh; */
+            position: relative;
+            top: -50vh;
+        }
+
+        .ship {
+            height: 100%;
+            position: relative;
+        }
+
+        /* Hide checkbox */
+        #toggle {
+            display: none;
+        }
+
+        .box {
+            height: 100vh;
+            position: absolute;
+            left: -70rem;
+            width: 80vw;
+            transition: 0.4s ease;
+            top: -50vh;
+            z-index: 10;
+            overflow-y: scroll;
+            backdrop-filter: grayscale(1) blur(1px);
+        }
+
+        .box::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .box::-webkit-scrollbar-thumb {
+            background: #823114;
+            border-radius: 10px;
+        }
+
+        .box:hover {
+            left: 0;
+            top: -50vh;
+        }
+
+        .box:hover~.click {
+            display: none;
+        }
+
+        /* When checked → slide in */
+        #toggle:hover~.box {
+            left: 0;
+        }
+
+        .click {
+            background: #e0abb7;
+            color: white;
+            width: 8px;
+            padding: 30px 0px;
+            position: absolute;
+            top: 50%;
+            cursor: pointer;
+            border-top-right-radius: 60px;
+            border-bottom-right-radius: 61px;
+            z-index: 10;
+        }
+
+        .hostel_2 {
+            /* height: 100vh; */
+            position: relative;
+            top: -50vh;
+        }
+
+        .ship_2 {
+            height: 100%;
+            position: relative;
+        }
+
+        /* Hide checkbox */
+        #toggle_2 {
+            display: none;
+        }
+
+        .box_2 {
+            height: 100vh;
+            position: absolute;
+            right: -70rem;
+            width: 26vw;
+            transition: 0.4s ease;
+            top: -50vh;
+            z-index: 10;
+            overflow-y: scroll;
+            backdrop-filter: grayscale(1) blur(1px);
+        }
+
+        .box_2 td {
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .box_2::-webkit-scrollbar {
+            width: 12px;
+        }
+
+        .box_2::-webkit-scrollbar-thumb {
+            background: #823114;
+            border-radius: 10px;
+        }
+
+        .box_2:hover {
+            right: 0;
+            top: -50vh;
+        }
+
+        .box_2:hover~.click_2 {
+            display: none;
+        }
+
+        /* When checked → slide in */
+        #toggle_2:hover~.box_2 {
+            right: 0;
+        }
+
+        .click_2 {
+            background: #e0abb7;
+            color: white;
+            width: 8px;
+            padding: 30px 0px;
+            position: absolute;
+            top: 50%;
+            cursor: pointer;
+            border-top-left-radius: 60px;
+            border-bottom-left-radius: 61px;
+            z-index: 10;
+            right: 0;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .video-bg,
+        .image-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .video-bg video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transform: scale(1.1);
+        }
+
+        .image-bg {
+            background: url("{{ url_for('static', filename='background.jpg') }}") no-repeat center center/cover;
+        }
+
+        /* .td_class {
+            width: 5rem !important;
+        } */
+
+        .table-wrapper {
+            position: relative;
+            display: inline-block;
+        }
+
+        .admin-table {
+            font-size: 16px;
+            border-collapse: collapse;
+        }
+
+        .admin-table td {
+            padding: 10px 20px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        #lens {
+            position: fixed;
+            width: 160px;
+            height: 160px;
+            border-radius: 50%;
+            /* border: 3px solid black; */
+            overflow: hidden;
+            pointer-events: none;
+            display: none;
+            z-index: 99999;
+            background: white;
+        }
+
+        #lens .zoom-content {
+            transform: scale(2);
+            transform-origin: top left;
+            position: absolute;
+        }
+
+        .button_popup {
+            padding: 12px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .popup-bg {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            font-family: "Caveat";
+        }
+
+        .popup-box {
+            background: transparent;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            text-align: center;
+            position: relative;
+            backdrop-filter: sepia(1);
+            transform: scale(0.7) translateY(-30px);
+            opacity: 0;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .popup-bg.show .popup-box {
+            transform: scale(1) translateY(0);
+            opacity: 1;
+        }
+
+        .close-btn {
+            padding: 8px 15px;
+            background: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #popup-box {
+            background: white;
+            padding: 20px 30px;
+            border-radius: 10px;
+            text-align: center;
+            z-index: 1000000;
+        }
+
+        .form_popup::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            border-radius: 0 10px 10px 0;
+            background: linear-gradient(182deg, red, transparent 48%);
+        }
+
+        .form_popup::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 1px;
+            height: 100%;
+            border-radius: 0 10px 10px 0;
+            background: linear-gradient(182deg, red, transparent 40%);
+        }
+
+        .form_popup form {
+            height: min-content;
+        }
+
+        .form_popup h2 {
+            color: white;
+        }
+
+        .form_popup input {
+            width: 80%;
+            border-radius: 8px;
+            border: none;
+            padding: 13px 7px;
+            box-shadow: 0px 1px 4px 0px #3e3e3e;
+            background: white;
+        }
+
+        .form_popup button {
+            position: static;
+            padding: 5px 19px;
+            font-size: 1.1rem;
+            margin-bottom: 1.4rem;
+        }
+
+        .form_popup .close_button {
+            position: absolute !important;
+            top: 0;
+            right: 0;
+            padding: 6px 6px !important;
+            border-radius: 0 !important;
+        }
+        #change_c_color{
+            transition: 0.5s all ease;
+            transition-delay: 1s;
+        }
+        #change_b_color{
+            transition: 0.5s all ease;
+        }
+    </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="big_cell">
+        {% if admin %}
+        <div class="video-bg">
+            <video autoplay playsinline loop>
+                <source src="{{ url_for('static', filename='video.mp4') }}" type="video/mp4">
+            </video>
+        </div>
+        {% else %}
+        <div class="image-bg"></div>
+        {% endif %}
+
+        <div class="cell">
+            <h1 class="welcomename" id="change_color">Welcome <span>{{
+                    current_user.username }}</span></h1>
+            {% if admin %}
+            <a class="logoutbtn" href="/logout">Logout</a>
+            {% else %}
+            <div class="cell_box">
+                <a onmouseover="openPopup()" style="color: white; padding-right: 0.5rem; cursor: pointer;">Change
+                    Password</a>
+                <a class="logoutbtn_2" href="/logout">Logout</a>
+            </div>
+            {% endif %}
+        </div>
+        <div class="contactBox">
+            <h1 style="text-align: left; padding: 2rem 11rem;" id="change_c_color">Contact Me</h1>
+
+            <!-- Logout Button -->
+
+            <!-- Contact Form -->
+            <form action="/contact" method="POST">
+                <div class="contact_cell" onmouseover="c_color()" onmouseout="r_color()">
+                    <div class="contact_cell_1">
+                        <label for="email">Email:</label><br>
+                        <textarea type="email" id="email" name="email" style="height: 3.9rem;"
+                            placeholder="email with @" required>{{current_user.email}}</textarea><br><br>
+
+                    </div>
+                    <div class="contact_cell_2">
+                        <label for="message">Message:</label><br>
+                        <textarea id="message" name="message" rows="4" placeholder="describe with emotion"
+                            required></textarea><br><br>
+                    </div>
+                </div>
+
+                <button type="submit" style="text-shadow: 0px 4px 5px #823114;" id="change_b_color">Send</button>
+            </form>
+
+            {% if contact_message %}
+            <h3 style="color: white; mix-blend-mode: difference; z-index: 5;">{{ contact_message }}</h3>
+            {% endif %}
+        </div>
+    </div>
+
+    {% if admin %}
+    <!-- Display all contact submissions -->
+    <div class="hostel">
+        <div class="ship">
+
+            <input type="checkbox" id="toggle">
+
+            <div class="box">
+                <div class="combineBox">
+                    <div class="submittedBox table-wrapper" id="tableArea">
+                        <h2>Submitted Contacts</h2>
+                        <table class="admin-table">
+                            <thead>
+                                <tr>
+                                    <th>Email</th>
+                                    <th class="td_class">Message</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for contact in contacts %}
+                                <tr>
+                                    <td class="zoom-cell">{{ contact.email }}</td>
+                                    <td class="zoom-cell td_class">{{ contact.message }}</td>
+                                    <td>
+                                        <div class="td_button">
+                                            <a href="{{ url_for('edit_contact', id=contact.id) }}">Edit</a>
+                                            <form id="delete-form-{{ contact.id }}" action="{{ url_for('delete_contact', id=contact.id) }}"
+                                                method="POST" style="display:inline;">
+                                                <button type="submit" class="button_edit"
+                                                    onclick="return confirm('Are you sure you want to delete this Contact?')">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <label for="toggle" class="click">
+
+            </label>
+
+        </div>
+    </div>
+    <div class="hostel_2">
+        <div class="ship_2">
+
+            <input type="checkbox" id="toggle_2">
+
+            <div class="box_2">
+                <div class="combineBox">
+                    <div class="userBox table-wrapper" id="tableArea">
+                        <h2>Users</h2>
+                        <table class="admin-table">
+                            <thead>
+                                <tr class="zoom-row">
+                                    <th>Username</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for user in users %}
+                                <tr class="zoom-row">
+                                    <td style="padding: 0px 0px;">{{ user.username }}</td>
+                                    <td title="{{ user.email }}" style="padding: 0px 0px;">{{ user.email | mask_email }}
+                                    </td>
+                                    <td style="padding: 0px 0px;">
+                                        <div class="td_button">
+                                            <a href="{{ url_for('edit_user', id=user.id) }}">Edit</a>
+                                            <form action="{{ url_for('delete_user', id=user.id) }}" method="post"
+                                                style="display:inline;">
+                                                <button type="submit" class="button_edit"
+                                                    onclick="return confirm('Are you sure you want to delete this user?')">Delete</button>
+                                            </form>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <label for="toggle_2" class="click_2">
+
+            </label>
+
+        </div>
+    </div>
+    {% else %}
+    <p class="logged_user">You must be logged in as Admin to view contact submissions.</p>
+    {% endif %}
+
+    <!-- Custom Confirmation Dialog -->
+    <div id="confirm-dialog" class="confirm-dialog">
+        <div class="confirm-dialog-content">
+            <p>Are you sure you want to delete this contact?</p>
+            <button id="confirm-yes">Yes</button>
+            <button id="confirm-no">No</button>
+        </div>
+    </div>
+    <div id="lens"></div>
+    <!-- <script>
+        function showConfirmDialog(formId) {
+            var dialog = document.getElementById('confirm-dialog');
+            var form = document.getElementById(formId);
+            document.getElementById('confirm-yes').onclick = function () {
+                form.submit();
+            };
+            document.getElementById('confirm-no').onclick = function () {
+                dialog.style.display = 'none';
+            };
+            dialog.style.display = 'flex';
+        }
+    </script> -->
+    <script>
+        const lens = document.getElementById("lens");
+        const table = document.getElementById("tableArea");
+        const zoomCells = document.querySelectorAll(".zoom-cell");
+
+        // Clone only zoomable content
+        const clone = table.cloneNode(true);
+        clone.classList.add("zoom-content");
+        lens.appendChild(clone);
+
+        const zoom = 2;
+        const lensSize = 180;
+
+        zoomCells.forEach(cell => {
+
+            cell.addEventListener("mousemove", (e) => {
+                lens.style.display = "block";
+
+                // Cursor follow
+                lens.style.left = e.clientX - lensSize / 2 + "px";
+                lens.style.top = e.clientY - lensSize / 2 + "px";
+
+                const rect = table.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+
+                clone.style.left = -(x * zoom - lensSize / 2) + "px";
+                clone.style.top = -(y * zoom - lensSize / 2) + "px";
+            });
+
+            cell.addEventListener("mouseleave", () => {
+                lens.style.display = "none";
+            });
+
+        });
+    </script>
+    <script>
+        function openPopup() {
+            const popup = document.getElementById("popup");
+            popup.style.display = "flex";
+            setTimeout(() => popup.classList.add("show"), 10);
+        }
+
+        function closePopup() {
+            const popup = document.getElementById("popup");
+            popup.classList.remove("show");
+            setTimeout(() => popup.style.display = "none", 300);
+        }
+
+    </script>
+    <script>
+        function changeColor() {
+            document.getElementById("change_color").style.color = "red";
+        }
+
+        function resetColor() {
+            document.getElementById("change_color").style.color = "black";
+        }
+    </script>
+    <script>
+        function c_color() {
+            document.getElementById("change_c_color").style.color = "#ffefaf";
+            document.getElementById("change_c_color").style.textShadow = "0px 0px 7px #ffefaf";
+            document.getElementById("change_c_color").style.borderBottom = "2px solid #ffefaf";
+            document.getElementById("change_b_color").style.color = "#ffefaf";
+            document.getElementById("change_b_color").style.backgroundColor = "#000";
+        }
+
+        function r_color() {
+            document.getElementById("change_c_color").style.color = "black";
+            document.getElementById("change_c_color").style.textShadow = "none";
+            document.getElementById("change_c_color").style.borderBottom = "2px solid transparent";
+            document.getElementById("change_b_color").style.color = "#000";
+            document.getElementById("change_b_color").style.backgroundColor = "#fff";
+        }
+    </script>
+
+    <div class="popup-bg" id="popup" onmouseover="changeColor()" onmouseout="resetColor()">
+        <div class="popup-box form_popup">
+            <h2>Change Password</h2>
+
+            <form method="POST" action="{{ url_for('change_password') }}">
+                <input type="password" name="old_password" placeholder="Old Password" required><br><br>
+                <input type="password" name="new_password" placeholder="New Password" required><br><br>
+                <input type="password" name="confirm_password" placeholder="Confirm New Password" required><br><br>
+                <button type="submit">Change Password</button>
+            </form>
+            <button class="close-btn close_button" onmouseover="closePopup()"></button>
+        </div>
+    </div>
+    <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+
+    <script>
+        var socket = io(); // same domain
+
+        socket.on("new_user", function (data) {
+            alert("New user registered: " + data.email);
+            var socket = io({
+                transports: ["polling"]
+            });
+        });
+    </script>
+</body>
+
+</html>

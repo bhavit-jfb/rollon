@@ -1,0 +1,34 @@
+@media (max-width: 833px) {
+    body {
+        background-position: 98rem 24% !important;
+    }
+
+    .inputBox {
+        transform: translateY(-65px);
+        padding: 4rem 3rem !important;
+    }
+
+    .inputBox:hover {
+        transform: translateY(-65px) !important;
+    }
+
+    form label {
+        font-size: 1.5rem !important;
+    }
+
+    form input {
+        width: 43.5vw !important;
+    }
+
+    form button {
+        padding: 4px 24px !important;
+    }
+
+    .owner h5 {
+        font-size: 0.8rem !important;
+    }
+
+    .header_text h5 {
+        color: #000 !important;
+    }
+}

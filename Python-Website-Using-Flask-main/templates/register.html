@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <link rel="stylesheet" href="collab/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='r_responsive.css') }}">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            /* background-image: url(https://images.pexels.com/photos/29004274/pexels-photo-29004274.jpeg) !important; */
+            background-position: 122rem 24%;
+            background-size: cover;
+            text-align: center;
+            font-family: "Caveat", cursive;
+            font-size: 1.2rem;
+            background-size: 123rem;
+            background-image: radial-gradient(rgb(255 255 255 / 60%) 1.05px, transparent 1px), url(/static/background_2.jpg);
+            background-size: 75px 75px, cover;
+            background-position: 0 0, center;
+            margin: 0;
+            padding: 0;
+        }
+
+        .inputBox {
+            box-shadow: 0px 8px 9px 2px #0000005e;
+            padding: 4rem;
+            border-radius: 15px;
+            backdrop-filter: blur(16px);
+            transition: 0.5s;
+            position: relative;
+            border-bottom-right-radius: 40px;
+        }
+
+        .inputBox::before {
+            content: "";
+            position: absolute;
+            right: 0;
+            top: 0;
+            width: 100%;
+            height: 11px;
+            background: radial-gradient(ellipse at top left, #ffffff, #0000ff00, #ffffff00);
+            clip-path: inset(0 0 0 0 round 0 10px 10px 0);
+        }
+
+
+        .inputBox::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 11px;
+            height: 100%;
+            border-radius: 0 10px 10px 0;
+            background: radial-gradient(ellipse at top left, #ffffff, #0000ff00, #ffffff00);
+            clip-path: inset(0 0 0 0 round 0 10px 10px 0);
+        }
+
+        .inputBox:hover {
+            transform: translateY(-15px);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        form label {
+            font-size: 1.2rem;
+        }
+
+        #password {
+            margin-top: 1rem;
+        }
+
+        form input {
+            width: 15vw;
+            border-radius: 8px;
+            border: none;
+            padding: 15px 10px;
+            box-shadow: 0px 1px 4px 0px #3e3e3e;
+            background: white;
+            margin-left: 1rem;
+        }
+
+        form input:focus {
+            outline: none;
+        }
+
+        form button {
+            margin-top: 1rem;
+            padding: 8px 19px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0px 1px 4px 0px #3e3e3e;
+            background: white;
+            font-family: inherit;
+            font-size: 1.1rem;
+        }
+
+        a {
+            position: relative;
+            top: 1rem;
+            color: #fff;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        .alert {
+            position: fixed;
+            top: 20px;
+            padding: 8px 17px;
+            background-color: #fff;
+            color: #000;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 9999;
+        }
+
+        .h1_text {
+            color: #f2ede8;
+        }
+    </style>
+</head>
+
+<body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+        {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="inputBox">
+        <h1 class="h1_text">Register</h1>
+        <form action="{{ url_for('register') }}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" placeholder="Enter a Suitable Username" required>
+            <!-- <br> -->
+            <label for="password">Email:</label>
+            <input name="email" placeholder="Enter Email" required>
+            <!-- <br> -->
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter a Strong Password" required>
+            <br>
+            <button type="submit">Register</button>
+        </form>
+        <a href="{{ url_for('login') }}">Already have an account? Login</a>
+    </div>
+</body>
+
+</html>

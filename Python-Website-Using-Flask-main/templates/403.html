@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>403 Forbidden</title>
+    <style>
+        body {
+            background: black;
+            color: red;
+            text-align: center;
+            font-family: Arial;
+            padding-top: 100px;
+        }
+        h1 {
+            font-size: 50px;
+        }
+        a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            background: red;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🚫 403 Forbidden</h1>
+    <p>You are not allowed to access this page.</p>
+    <a href="{{ url_for('home') }}">Go Home</a>
+</body>
+</html>

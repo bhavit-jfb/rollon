@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit User</title>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const bodyBg = getComputedStyle(document.body).backgroundImage;
+            const formBox = document.querySelector(".form_box h1");
+
+            formBox.style.backgroundImage = bodyBg;
+            formBox.style.backgroundSize = "808%";
+            formBox.style.backgroundPosition = "733px 616px";
+        });
+    </script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-image: radial-gradient(rgb(255 255 255 / 60%) 1.05px, transparent 1px), url(/static/background_3.jpg);
+            background-size: 55px 55px, cover;
+            background-position: 0 0, top;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            white-space: pre-wrap;
+            align-content: stretch;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .form_box {
+            position: relative;
+            background: transparent;
+            backdrop-filter: grayscale(1);
+            border-radius: 2rem;
+            box-shadow: 0px 0px 8px 0px #000000;
+            text-align: -webkit-center;
+        }
+
+        .form_box h1 {
+            width: max-content;
+            padding: 4px 15px;
+            border-radius: 8px;
+            /* box-shadow: inset 0px 0px 15px 0px #000000; */
+            color: #ffffff;
+        }
+
+        /* Styles for the custom confirmation dialog */
+        .confirm-dialog {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            justify-content: center;
+            align-items: center;
+        }
+
+        .confirm-dialog-content {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            text-align: center;
+        }
+
+        .confirm-dialog button {
+            margin: 5px;
+        }
+
+        .welcomename {
+            font-size: 0.8rem;
+            position: fixed;
+            margin: 0;
+            top: 10px;
+            left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .logoutbtn {
+            position: fixed;
+            font-size: 0.8rem;
+            right: 10px;
+            top: 10px;
+        }
+
+        .contactBox {
+            text-align: center;
+        }
+
+        form {
+            text-align: center;
+        }
+
+        form label {
+            font-size: 1.2rem;
+        }
+
+        #password {
+            margin-top: 1rem;
+        }
+
+        form input,
+        textarea {
+            width: 50vh;
+            border-radius: 8px;
+            border: none;
+            padding: 8px 10px;
+            box-shadow: 0px 1px 4px 0px #3e3e3e;
+            background: white;
+            margin-left: 1rem;
+        }
+
+        form input,
+        textarea:focus {
+            outline: none;
+        }
+
+        form button {
+            margin-top: 1rem;
+            padding: 8px 25px;
+            border-radius: 8px;
+            border: none;
+            box-shadow: 0px 1px 4px 0px #3e3e3e;
+            background: white;
+        }
+
+        a {
+            position: relative;
+            text-decoration: none;
+            color: #b02927;
+        }
+
+        hr {
+            margin-top: 2rem;
+        }
+
+        .combineBox {
+            display: flex;
+            justify-content: space-around;
+            align-items: baseline;
+        }
+
+        table,
+        thead,
+        tr,
+        th,
+        td {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="form_box">
+        <h1>Edit User</h1>
+        <form action="{{ url_for('edit_user', id=user.id) }}" method="post">
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username" value="{{ user.username }}" required><br>
+            <label for="username">Email:</label>
+            <input type="text" id="email" name="email" value="{{ user.email }}" required><br>
+            <label for="password">New Password:</label>
+            <input type="password" id="password" name="password" placeholder="Leave blank to keep current password"><br>
+            <button type="submit">Save Changes</button>
+        </form>
+        <a href="{{ url_for('home') }}">Back</a>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,32 @@
+@media (max-width: 833px) {
+    .contact_cell {
+        flex-wrap: wrap;
+    }
+
+    form input,
+    textarea {
+        width: 80vw !important;
+    }
+
+    .contactBox h1 {
+        text-align: center !important;
+        padding: 0rem 4rem !important;
+    }
+
+    .cell {
+        padding: 0.8rem 1.2rem !important;
+    }
+
+    .contact_cell_1 {
+        text-align: left !important;
+    }
+
+    .contact_cell_2 {
+        text-align: left !important;
+        color: #fff !important;
+    }
+
+    form button {
+        position: static !important;
+    }
+}

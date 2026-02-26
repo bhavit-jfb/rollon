@@ -1,0 +1,15 @@
+@media (max-width: 833px) {
+    .inputBox {
+        padding: 3.5rem 2.5rem !important;
+            transform: translateY(-30px) !important;
+    }
+
+    form label {
+        color: #e6d9c9;
+    }
+
+    form input {
+        width: 46vw !important;
+        padding: 15px 10px;
+    }
+}
